@@ -1,26 +1,31 @@
-function calcularMedia() {
-    let nota1 = parseFloat(document.getElementById("nota1").value);
-    let nota2 = parseFloat(document.getElementById("nota2").value);
-    let nota3 = parseFloat(document.getElementById("nota3").value);
+function calcularDesconto() {
     
+    let item = document.getElementById("item").value;
+    let preco = parseFloat(document.getElementById("preco").value);
     let resultado = document.getElementById("resultado");
 
-    if (isNaN(nota1) || isNaN(nota2) || isNaN(nota3)) {
-        resultado.textContent = "Por favor, insira todas as notas corretamente!";
+   
+    if (isNaN(preco) || preco <= 0) {
+        resultado.textContent = "Por favor, insira um preço válido para a peça!";
         resultado.style.color = "red";
         return;
     }
 
-    let media = (nota1 + nota2 + nota3) / 3;
+    let desconto = 0;
+    let precoFinal;
 
-    if (media >= 6) {
-        resultado.textContent = `Média: ${media.toFixed(1)} - Aprovado`;
-        resultado.style.color = "green";
-    } else if (media >= 4) {
-        resultado.textContent = `Média: ${media.toFixed(1)} - Recuperação`;
-        resultado.style.color = "orange";
-    } else {
-        resultado.textContent = `Média: ${media.toFixed(1)} - Reprovado`;
-        resultado.style.color = "red";
+ 
+    if (item === "camisa") {
+        desconto = 0.20;
+    } else if (item === "bermuda") {
+        desconto = 0.10; 
+    } else if (item === "calca") {
+        desconto = 0.15; 
     }
+
+    precoFinal = preco - (preco * desconto);
+
+    
+    resultado.textContent = `Preço final: R$ ${precoFinal.toFixed(2)} (Desconto de ${desconto * 100}%)`;
+    resultado.style.color = "green";
 }
